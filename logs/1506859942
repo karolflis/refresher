@@ -1,0 +1,17 @@
+array (
+  0 => 
+  stdClass::__set_state(array(
+     'Timestamp' => '2017-10-01T12:12:22.894Z',
+     'Ack' => 'Failure',
+     'Errors' => 
+    stdClass::__set_state(array(
+       'ShortMessage' => 'Internal error to the application.',
+       'LongMessage' => 'Internal error to the application.',
+       'ErrorCode' => '10007',
+       'SeverityCode' => 'Error',
+       'ErrorClassification' => 'RequestError',
+    )),
+     'Version' => '1031',
+     'Build' => 'E1031_UNI_API5_18532394_R1',
+  )),
+)
