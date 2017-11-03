@@ -28,7 +28,7 @@ $responseObj = $clientGet->__soapCall('GetMyeBaySelling', array($params), null, 
 if (isset($responseObj->ActiveList->ItemArray)) {
     $itemArray = $responseObj->ActiveList->ItemArray->Item;
 } else {
-    throw new Exception($responseObj);
+    throw new Exception('Couldnt get response object from GetMyEbaySelling');
 }
 
 $toUpdate = [];
@@ -40,15 +40,16 @@ foreach ($itemArray as $item) {
 
     foreach ($item->Variations->Variation as $variation) {
 
-        if ($variation->Quantity < 1000) {
+        if ($variation->Quantity < 10) {
             $toUpdate[] = [
                 'ItemID' => $itemId,
                 'SKU' => $variation->SKU,
-                'Quantity' => '1000',
+                'Quantity' => '10',
             ];
         }
     }
 }
+
 $client = new SOAPClient($wsdl_file, array('location' => $api_url . '/wsapi?callname=ReviseInventoryStatus' . '&appid=' . $app_id . '&siteid='. $site_id .'&version='. $compat_level .'&routing=new'));
 $header = new SoapHeader('urn:ebay:apis:eBLBaseComponents', 'RequesterCredentials', $requesterCredentials);
 
